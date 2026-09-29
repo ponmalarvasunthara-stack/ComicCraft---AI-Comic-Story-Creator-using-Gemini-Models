@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ComicCraft — Create Your Universe</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="landing">
+  <nav class="nav">
+    <a class="brand" href="/"><span class="brand-mark">✦</span> COMIC<span>CRAFT</span></a>
+    <div class="nav-pill">AI STORY STUDIO <i></i></div>
+  </nav>
+
+  <main class="hero-grid">
+    <section class="hero-copy">
+      <div class="eyebrow">YOUR IDEA → A FULL COMIC</div>
+      <h1>Make stories.<br><em>Make legends.</em></h1>
+      <p class="lead">Turn a simple prompt into a five-panel comic with characters, dialogue, narration and cinematic scenes.</p>
+      <div class="hero-stats">
+        <div><strong>05</strong><span>Panels</span></div>
+        <div><strong>AI</strong><span>Story engine</span></div>
+        <div><strong>PDF</strong><span>Export ready</span></div>
+      </div>
+    </section>
+
+    <section class="creator-card">
+      <div class="card-top">
+        <div><span class="live-dot"></span> CREATOR CONSOLE</div>
+        <span class="issue">ISSUE #001</span>
+      </div>
+      <form action="/generate" method="post" id="comicForm">
+        <label>STORY PROMPT
+          <textarea name="story_prompt" required placeholder="A brave fox discovers a hidden city beneath an enchanted forest..."></textarea>
+        </label>
+        <div class="two-col">
+          <label>MAIN CHARACTER
+            <input name="character_name" required placeholder="Nova">
+          </label>
+          <label>SETTING
+            <select name="setting">
+              <option>Enchanted Forest</option>
+              <option>Neon City</option>
+              <option>Space Station</option>
+              <option>School</option>
+              <option>Ancient Kingdom</option>
+              <option>Underwater City</option>
+            </select>
+          </label>
+        </div>
+        <div class="two-col">
+          <label>TONE
+            <select name="tone">
+              <option>Funny</option>
+              <option>Dramatic</option>
+              <option>Adventurous</option>
+              <option>Poetic</option>
+              <option>Mysterious</option>
+            </select>
+          </label>
+          <label>ART STYLE
+            <select name="art_style">
+              <option>Comic Book</option>
+              <option>Anime</option>
+              <option>Pixel Art</option>
+              <option>Realistic</option>
+              <option>Graphic Novel</option>
+            </select>
+          </label>
+        </div>
+        <button class="create-btn" type="submit"><span>CREATE MY COMIC</span><b>→</b></button>
+      </form>
+      <p class="microcopy">✦ No drawing skills required · AI-assisted creation</p>
+    </section>
+  </main>
+
+  <section class="feature-strip">
+    <div><b>01</b><strong>Prompt it</strong><span>Describe your world.</span></div>
+    <div><b>02</b><strong>Generate</strong><span>Build the five-panel arc.</span></div>
+    <div><b>03</b><strong>Preview</strong><span>Read every scene.</span></div>
+    <div><b>04</b><strong>Export</strong><span>Save as PDF.</span></div>
+  </section>
+</body>
+</html>

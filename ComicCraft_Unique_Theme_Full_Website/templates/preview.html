@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ title }} — ComicCraft</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="preview-page">
+  <nav class="nav">
+    <a class="brand" href="/"><span class="brand-mark">✦</span> COMIC<span>CRAFT</span></a>
+    <a class="back-link" href="/">← NEW COMIC</a>
+  </nav>
+
+  <header class="preview-head">
+    <div>
+      <div class="eyebrow">YOUR STORYBOARD IS READY</div>
+      <h1>{{ title }}</h1>
+      <p>{{ character }} · {{ setting }} · {{ tone }} · {{ art_style }}</p>
+    </div>
+    <button class="export-btn" onclick="exportComic()">DOWNLOAD PDF ↓</button>
+  </header>
+
+  <main class="comic-board">
+    {% for panel in panels %}
+    <article class="comic-panel">
+      <div class="panel-number">0{{ panel.number }}</div>
+      <div class="panel-art">
+        <img src="{{ panel.image }}" alt="{{ panel.image_prompt }}" loading="lazy">
+        <span class="burst">PANEL {{ panel.number }}</span>
+      </div>
+      <div class="panel-info">
+        <h2>{{ panel.title }}</h2>
+        <p class="scene">{{ panel.scene }}</p>
+        <div class="caption">{{ panel.caption }}</div>
+        <p class="narration">{{ panel.narration }}</p>
+        <blockquote>{{ panel.dialogue }}</blockquote>
+      </div>
+    </article>
+    {% endfor %}
+  </main>
+
+  <section class="end-card">
+    <div>
+      <div class="eyebrow">THE END... FOR NOW</div>
+      <h2>Every great comic starts with an idea.</h2>
+    </div>
+    <a href="/">CREATE ANOTHER →</a>
+  </section>
+
+<script>
+const panels = {{ panels | tojson }};
+const title = {{ title | tojson }};
+async function exportComic() {
+  const btn = document.querySelector('.export-btn');
+  btn.disabled = true; btn.textContent = 'BUILDING PDF...';
+  try {
+    const res = await fetch('/export', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({panels, title})
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.detail || 'Export failed');
+    window.location.href = data.download_url;
+  } catch (e) {
+    alert(e.message);
+    btn.disabled = false; btn.textContent = 'DOWNLOAD PDF ↓';
+  }
+}
+</script>
+</body>
+</html>
